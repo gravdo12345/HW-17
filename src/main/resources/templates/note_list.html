@@ -1,0 +1,33 @@
+<!-- note_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note List</title>
+</head>
+<body>
+<h1>Note List</h1>
+<ul>
+    <li>
+        <strong>Title:</strong> Note 1<br>
+        <strong>Content:</strong> This is the content of Note 1<br>
+        <form action="/note/delete" method="POST">
+            <input type="hidden" name="id" value="1">
+            <button type="submit">Delete</button>
+        </form>
+        <a href="/note/edit?id=1">Edit</a>
+    </li>
+    <li>
+        <strong>Title:</strong> Note 2<br>
+        <strong>Content:</strong> This is the content of Note 2<br>
+        <form action="/note/delete" method="POST">
+            <input type="hidden" name="id" value="2">
+            <button type="submit">Delete</button>
+        </form>
+        <a href="/note/edit?id=2">Edit</a>
+    </li>
+    <!-- Repeat similar structure for other notes -->
+</ul>
+</body>
+</html>

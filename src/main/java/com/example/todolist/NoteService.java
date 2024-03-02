@@ -1,47 +1,47 @@
 package com.example.todolist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
 
-    private final List<Note> notes = new ArrayList<>();
-    private long nextId = 1;
+    private final NoteRepository noteRepository;
+
+    @Autowired
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     public List<Note> listAll() {
-        return notes;
+        return noteRepository.findAll();
     }
 
     public Note add(Note note) {
-        note.setId(nextId++);
-        notes.add(note);
-        return note;
+        return noteRepository.save(note);
     }
 
-    public void deleteById(long id) {
-        notes.removeIf(note -> note.getId() == id);
+    public void deleteById(Long id) {
+        noteRepository.deleteById(id);
     }
 
     public void update(Note note) {
-        for (int i = 0; i < notes.size(); i++) {
-            Note existingNote = notes.get(i);
-            if (existingNote.getId() == note.getId()) {
-                existingNote.setTitle(note.getTitle());
-                existingNote.setContent(note.getContent());
-                return;
-            }
+        Optional<Note> existingNote = noteRepository.findById(note.getId());
+        if (existingNote.isPresent()) {
+            Note updatedNote = existingNote.get();
+            updatedNote.setTitle(note.getTitle());
+            updatedNote.setContent(note.getContent());
+            noteRepository.save(updatedNote);
+        } else {
+            throw new IllegalArgumentException("Note with id " + note.getId() + " not found");
         }
-        throw new IllegalArgumentException("Note with id " + note.getId() + " not found");
     }
 
-    public Note getById(long id) {
-        for (Note note : notes) {
-            if (note.getId() == id) {
-                return note;
-            }
-        }
-        throw new IllegalArgumentException("Note with id " + id + " not found");
+    public Note getById(Long id) {
+        return noteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Note with id " + id + " not found"));
     }
 }

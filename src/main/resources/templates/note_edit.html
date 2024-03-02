@@ -1,0 +1,20 @@
+<!-- note_edit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Note</title>
+</head>
+<body>
+<h1>Edit Note</h1>
+<form action="/note/edit" method="POST">
+    <input type="hidden" name="id" value="1">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="Note 1"><br>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content">This is the content of Note 1</textarea><br>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
