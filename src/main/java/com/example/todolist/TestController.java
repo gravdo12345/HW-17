@@ -8,7 +8,7 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
-        return "test"; // This will resolve to test.html Thymeleaf template
+        return "test";
     }
 }
 

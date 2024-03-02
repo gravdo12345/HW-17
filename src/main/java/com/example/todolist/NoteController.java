@@ -18,5 +18,4 @@ public class NoteController {
         return "edit";
     }
 
-    // Implement methods for deleting(from reality) notes as well
 }
